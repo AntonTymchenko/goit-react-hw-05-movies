@@ -33,3 +33,9 @@ export function fetchMovieReviewById(movie_id) {
     `${BASE_URL}/movie/${movie_id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
   );
 }
+//https://api.themoviedb.org/3/search/movie?api_key=cf7103a04560136cfec7834a7d0f8600&language=en-US&query=Batman&page=1&include_adult=false
+export function fetchMovieByQuery(query) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+  );
+}

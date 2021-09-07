@@ -39,9 +39,14 @@ function MovieCardView() {
             ))}
           </ul>
           <h3>Additional inforamtion</h3>
-
-          <NavLink to={`${url}/cast`}>Cast</NavLink>
-          <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+          <ul>
+            <li key={100}>
+              <NavLink to={`${url}/cast`}>Cast</NavLink>
+            </li>
+            <li key={101}>
+              <NavLink to={`${url}/reviews`}> Reviews</NavLink>
+            </li>
+          </ul>
 
           <Route path={`${path}/cast`}>
             <CastView movieId={movieId} />

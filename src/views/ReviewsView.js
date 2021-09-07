@@ -12,7 +12,7 @@ function ReviewsView({ movieId }) {
   return (
     <ul>
       {review === null || review.length === 0 ? (
-        <p>There are not any informathions...</p>
+        <p>There are not any informations...</p>
       ) : (
         review.map((item) => (
           <li key={item.id}>

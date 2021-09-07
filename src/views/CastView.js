@@ -25,7 +25,8 @@ function CastView({ movieId }) {
             return (
               <li key={actor.id}>
                 <img src={srcUrl} alt={actor.name} width="80px" height="80px" />
-                <p>{actor.name}</p>
+                <p>Character: {actor.character}</p>
+                <p>Actor: {actor.name}</p>
               </li>
             );
           })}
