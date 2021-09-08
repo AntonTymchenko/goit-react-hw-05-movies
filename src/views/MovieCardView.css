@@ -1,6 +1,7 @@
 .wrapperCardInfo {
-  min-height: 400px;
+  min-height: 70vh;
 }
+
 .imgCard {
   width: 350px;
   height: 400px;
@@ -11,7 +12,10 @@
   margin-left: 20px;
   margin-right: 20px;
 }
-
+.loader {
+  margin-left: 45%;
+  margin-top: 10%;
+}
 .ganres-div {
   list-style: none;
   display: flex;

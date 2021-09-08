@@ -6,22 +6,28 @@ import { fetchMoviebyId } from "../service/service";
 import { CastView } from "../views/CastView";
 import { ReviewsView } from "./ReviewsView";
 import "./MovieCardView.css";
+import { loadingStatus } from "../utils/loadingStatus";
+import Loader from "react-loader-spinner";
 
 function MovieCardView() {
+  const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
   //   console.log(movieId);
   useEffect(() => {
+    setLoadStatus(loadingStatus.PENDING);
     fetchMoviebyId(movieId).then((movies) => {
       //   console.log(movies);
       setMovie(movies);
+      setLoadStatus(loadingStatus.RESOLVED);
     });
   }, [movieId]);
 
   return (
     <>
-      {movie && (
+      {loadStatus === loadingStatus.PENDING && <Loader className="loader" />}
+      {loadStatus === loadingStatus.RESOLVED && (
         <>
           <ButtonBack>
             <NavLink to="/" className="linkBack">

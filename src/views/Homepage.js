@@ -20,13 +20,13 @@ function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className={s.homePageMain}>
       <Title title="Tranding today" />
       {loadStatus === loadingStatus.PENDING && <Loader className={s.loader} />}
       {loadStatus === loadingStatus.RESOLVED && (
         <ListOfMoviesHomePage movies={movies.results} />
       )}
-    </>
+    </div>
   );
 }
 

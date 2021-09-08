@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Movies() {
+function MoviesSearchForm() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -67,4 +67,4 @@ function Movies() {
   );
 }
 
-export { Movies };
+export { MoviesSearchForm };
