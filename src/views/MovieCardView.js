@@ -24,7 +24,6 @@ function MovieCardView() {
       {movie && (
         <>
           <ButtonBack>
-            1
             <NavLink to="/" className="linkBack">
               Go back
             </NavLink>
