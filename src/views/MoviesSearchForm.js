@@ -22,9 +22,9 @@ function MoviesSearchForm() {
     setLoadStatus(loadingStatus.PENDING);
     if (query.trim() === "") {
       setLoadStatus(loadingStatus.RESOLVED);
-
       return;
     } else {
+      setResults([]);
       fetchMovieByQuery(query).then((data) => {
         if (data.results.length === 0) {
           setLoadStatus(loadingStatus.RESOLVED);
