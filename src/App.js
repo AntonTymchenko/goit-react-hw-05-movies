@@ -1,7 +1,7 @@
 import "./App.css";
 import Container from "./components/Container/Container";
 import Appbar from "./components/Appbar/Appbar";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { HomePage } from "./views/Homepage";
 
 import { Movies } from "./views/Movies";
@@ -24,10 +24,10 @@ function App() {
           <Route path="/movies/:movieId">
             <MovieCardView />
           </Route>
-
-          <Route path="/">
+          <Redirect to="/" />
+          {/* <Route path="/">
             <HomePage />
-          </Route>
+          </Route> */}
         </Switch>
       </Container>
       <Footer />
