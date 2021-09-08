@@ -18,12 +18,13 @@ body {
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: lightgrey;
 }
 
 img {
   display: block;
   max-width: 100%;
-  height: auto;
+  max-height: 90%;
 }
 .App {
   display: grid;

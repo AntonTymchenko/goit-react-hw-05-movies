@@ -1,3 +1,6 @@
 .title {
-  font-size: 15px;
+  font-size: 48px;
+  font-family: "Spicy Rice", cursive;
+  text-align: center;
+  text-shadow: 4px 4px 4px #ccc;
 }

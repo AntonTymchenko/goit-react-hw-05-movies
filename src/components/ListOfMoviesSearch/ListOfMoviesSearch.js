@@ -1,10 +1,9 @@
-import { MovieCardView } from "../../views/MovieCard.View";
+import { MovieCardView } from "../../views/MovieCardView";
 import { Link, Route, useRouteMatch } from "react-router-dom";
-// import { useState } from "react";
 
 function ListOfMoviesSearch({ results }) {
   const { url, path } = useRouteMatch();
-  //   const [movieNumber, setMovieNumber] = useState(null);
+
   return (
     <>
       <ul>
