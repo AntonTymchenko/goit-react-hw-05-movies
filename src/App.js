@@ -25,9 +25,6 @@ function App() {
             <MovieCardView />
           </Route>
           <Redirect to="/" />
-          {/* <Route path="/">
-            <HomePage />
-          </Route> */}
         </Switch>
       </Container>
       <Footer />
