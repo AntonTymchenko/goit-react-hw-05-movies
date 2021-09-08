@@ -1,6 +1,6 @@
 import { fetchMovieCastCrewById } from "../service/service";
 import { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
+import "./CastView.css";
 
 function CastView({ movieId }) {
   const [cast, setCast] = useState(null);
@@ -13,7 +13,7 @@ function CastView({ movieId }) {
   }, [movieId]);
   return (
     <>
-      <ul>
+      <ul className="castList">
         {cast &&
           cast.map((actor) => {
             let srcUrl = ``;
@@ -23,10 +23,14 @@ function CastView({ movieId }) {
               srcUrl = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
             }
             return (
-              <li key={actor.id}>
+              <li key={actor.id} className="castListItem">
                 <img src={srcUrl} alt={actor.name} width="80px" height="80px" />
-                <p>Character: {actor.character}</p>
-                <p>Actor: {actor.name}</p>
+                <p className="actorCharacter">
+                  <b>Character</b>: {actor.character}
+                </p>
+                <p className="actorCharacter">
+                  <b>Actor</b>: {actor.name}
+                </p>
               </li>
             );
           })}

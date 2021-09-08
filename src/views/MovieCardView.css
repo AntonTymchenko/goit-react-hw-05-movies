@@ -1,3 +1,43 @@
-.wrapperCardInfo {
+.imgCard {
+  width: 250px;
+  height: 300px;
+  float: left;
+  margin-right: 20px;
+}
+.overview {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ganres-div {
+  list-style: none;
   display: flex;
+  align-items: center;
+}
+.ganresList {
+  list-style: none;
+  display: flex;
+  margin-left: -30px;
+}
+.ganresListItem + .ganresListItem {
+  margin-left: 10px;
+}
+.AddInform-div {
+  margin-top: 200px;
+  margin-left: 200px;
+}
+.CastReviewList {
+  margin-left: 250px;
+  list-style: none;
+}
+.castReviewListItem {
+  text-decoration: none;
+  color: #131314;
+  border-bottom: 1px solid;
+  border-bottom-color: rgba(15, 122, 252, 0.2);
+}
+.castReviewListItem:hover {
+  text-decoration: none;
+  color: #7200cf;
+  border-bottom-color: rgba(208, 64, 0, 0.2);
 }
