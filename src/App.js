@@ -3,7 +3,7 @@ import Container from "./components/Container/Container";
 import Appbar from "./components/Appbar/Appbar";
 import { Route, Switch } from "react-router-dom";
 import { HomePage } from "./views/Homepage";
-import { NotFoundView } from "./views/NotFoundView";
+
 import { Movies } from "./views/Movies";
 import { MovieCardView } from "./views/MovieCardView";
 import { Footer } from "./components/Footer/Footer";
@@ -25,8 +25,8 @@ function App() {
             <MovieCardView />
           </Route>
 
-          <Route>
-            <NotFoundView />
+          <Route path="/">
+            <HomePage />
           </Route>
         </Switch>
       </Container>

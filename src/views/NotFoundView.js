@@ -1,7 +1,14 @@
-import { Title } from "../components/Title/Title";
+import { Route } from "react-router";
+import { HomePage } from "./Homepage";
 
 function NotFoundView() {
-  return <Title title="404 the page is not found" />;
+  return (
+    <>
+      <Route>
+        <HomePage />
+      </Route>
+    </>
+  );
 }
 
 export { NotFoundView };
