@@ -1,5 +1,5 @@
 import { fetchMovieByQuery } from "../service/service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Movies.css";
 import { ListOfMoviesSearch } from "../components/ListOfMoviesSearch/ListOfMoviesSearch";
 import { loadingStatus } from "../utils/loadingStatus";
@@ -7,60 +7,48 @@ import Loader from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { MovieFormOnly } from "../components/MovieFormOnly/MovieFormOnly";
 
-function MoviesSearchForm() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState(null);
+function MoviesSearchForm({ saveQuery, queryApp }) {
+  const [query, setQuery] = useState(queryApp);
+  const [results, setResults] = useState([]);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
 
-  const handleInput = (e) => {
-    const value = e.currentTarget.value;
+  const onSubmitForm = (value) => {
     setQuery(value);
   };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setLoadStatus(loadingStatus.PENDING);
+  useEffect(() => {
+    if (!query) {
+      return;
+    }
+    saveQuery(query);
     if (query.trim() === "") {
       setLoadStatus(loadingStatus.RESOLVED);
       return;
     } else {
-      setResults([]);
       fetchMovieByQuery(query).then((data) => {
         if (data.results.length === 0) {
           setLoadStatus(loadingStatus.RESOLVED);
+          setResults([]);
           return toast.error("Try again please !!!");
         } else {
           setResults(data.results);
           setLoadStatus(loadingStatus.RESOLVED);
         }
       });
-      setQuery("");
     }
-  };
+  }, [query, saveQuery]);
 
   return (
     <>
       <ToastContainer autoClose={3000} />
       <div className="searchPage">
-        <form onSubmit={handleFormSubmit} className="formForSearch">
-          <input
-            value={query}
-            className="SearchForm-input"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search movies"
-            onChange={handleInput}
-          />
-          <button type="submit" className="btn">
-            Search
-          </button>
-        </form>
+        <MovieFormOnly handleFormSubmit={onSubmitForm} />
         {loadStatus === loadingStatus.PENDING && (
           <Loader className="loaderMovies" />
         )}
         {loadStatus === loadingStatus.RESOLVED && (
-          <ListOfMoviesSearch results={results} />
+          <ListOfMoviesSearch results={results} query={query} />
         )}
       </div>
     </>

@@ -9,12 +9,12 @@ import "./MovieCardView.css";
 import { loadingStatus } from "../utils/loadingStatus";
 import Loader from "react-loader-spinner";
 
-function MovieCardView() {
+function MovieCardView({ query, saveQuery }) {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
-  //   console.log(movieId);
+
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
     fetchMoviebyId(movieId).then((movies) => {
@@ -23,17 +23,26 @@ function MovieCardView() {
       setLoadStatus(loadingStatus.RESOLVED);
     });
   }, [movieId]);
-
+  const clickGoBackLink = () => {
+    saveQuery(query);
+  };
   return (
     <>
       {loadStatus === loadingStatus.PENDING && <Loader className="loader" />}
       {loadStatus === loadingStatus.RESOLVED && (
         <>
           <ButtonBack>
-            <NavLink to="/" className="linkBack">
+            <NavLink
+              to={`${path.slice(0, 8)}`}
+              className="linkBack"
+              onClick={clickGoBackLink}
+            >
               Go back
             </NavLink>
           </ButtonBack>
+          <Route exact path={`${path.slice(0, 8)}`}>
+            {/* <MoviesSearchForm /> */}
+          </Route>
 
           <Title title={movie.title + " " + movie.release_date.slice(0, 4)} />
           <div className="wrapperCardInfo">
@@ -59,7 +68,7 @@ function MovieCardView() {
                   ))}
                 </ul>
               </div>
-              <div clasName="AddInform-div">
+              <div className="AddInform-div">
                 <h3>Additional inforamtion</h3>
                 <ul className="CastReviewList">
                   <li key={100}>
@@ -72,7 +81,6 @@ function MovieCardView() {
                       to={`${url}/reviews`}
                       className="castReviewListItem"
                     >
-                      {" "}
                       Reviews
                     </NavLink>
                   </li>
