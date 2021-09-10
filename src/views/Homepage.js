@@ -8,7 +8,7 @@ import Loader from "react-loader-spinner";
 import s from "./Homepage.module.css";
 import { ListOfMoviesHomePage } from "../components/ListOfMoviesHomePage/ListOfMoviesHomePage";
 
-function HomePage() {
+function HomePage({ changePage }) {
   const [movies, setMovies] = useState(null);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   useEffect(() => {
@@ -24,7 +24,7 @@ function HomePage() {
       <Title title="Tranding today" />
       {loadStatus === loadingStatus.PENDING && <Loader className={s.loader} />}
       {loadStatus === loadingStatus.RESOLVED && (
-        <ListOfMoviesHomePage movies={movies.results} />
+        <ListOfMoviesHomePage movies={movies.results} changePage={changePage} />
       )}
     </div>
   );

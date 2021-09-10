@@ -10,21 +10,33 @@ import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(null);
 
+  const pageForCard = (name) => {
+    setPage(name);
+  };
   return (
     <>
       <Container>
         <Appbar clearQuery={setQuery} />
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            <HomePage changePage={pageForCard} />
           </Route>
           <Route exact path="/movies">
-            <MoviesSearchForm saveQuery={setQuery} queryApp={query} />
+            <MoviesSearchForm
+              saveQuery={setQuery}
+              queryApp={query}
+              changePage={pageForCard}
+            />
           </Route>
 
           <Route path="/movies/:movieId">
-            <MovieCardView query={query} saveQuery={setQuery} />
+            <MovieCardView
+              query={query}
+              saveQuery={setQuery}
+              currentPage={page}
+            />
           </Route>
           <Redirect to="/" />
         </Switch>

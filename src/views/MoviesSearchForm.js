@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MovieFormOnly } from "../components/MovieFormOnly/MovieFormOnly";
 
-function MoviesSearchForm({ saveQuery, queryApp }) {
+function MoviesSearchForm({ saveQuery, queryApp, changePage }) {
   const [query, setQuery] = useState(queryApp);
   const [results, setResults] = useState([]);
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
@@ -48,7 +48,11 @@ function MoviesSearchForm({ saveQuery, queryApp }) {
           <Loader className="loaderMovies" />
         )}
         {loadStatus === loadingStatus.RESOLVED && (
-          <ListOfMoviesSearch results={results} query={query} />
+          <ListOfMoviesSearch
+            results={results}
+            query={query}
+            pageForCard={changePage}
+          />
         )}
       </div>
     </>

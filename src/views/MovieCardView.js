@@ -9,7 +9,7 @@ import "./MovieCardView.css";
 import { loadingStatus } from "../utils/loadingStatus";
 import Loader from "react-loader-spinner";
 
-function MovieCardView({ query, saveQuery }) {
+function MovieCardView({ query, saveQuery, currentPage }) {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
@@ -18,7 +18,7 @@ function MovieCardView({ query, saveQuery }) {
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
     fetchMoviebyId(movieId).then((movies) => {
-      //   console.log(movies);
+      // console.log(movies);
       setMovie(movies);
       setLoadStatus(loadingStatus.RESOLVED);
     });
@@ -26,6 +26,7 @@ function MovieCardView({ query, saveQuery }) {
   const clickGoBackLink = () => {
     saveQuery(query);
   };
+
   return (
     <>
       {loadStatus === loadingStatus.PENDING && <Loader className="loader" />}
@@ -33,25 +34,32 @@ function MovieCardView({ query, saveQuery }) {
         <>
           <ButtonBack>
             <NavLink
-              to={`${path.slice(0, 8)}`}
+              to={`${currentPage}`}
               className="linkBack"
               onClick={clickGoBackLink}
             >
               Go back
             </NavLink>
           </ButtonBack>
-          <Route exact path={`${path.slice(0, 8)}`}>
-            {/* <MoviesSearchForm /> */}
-          </Route>
+          <Route exact path={`${currentPage}`} />
 
           <Title title={movie.title + " " + movie.release_date.slice(0, 4)} />
           <div className="wrapperCardInfo">
             <div className="imgOverview">
-              <img
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                alt={movie.title}
-                className="imgCard"
-              />
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                  alt={movie.title}
+                  className="imgCard"
+                />
+              ) : (
+                <img
+                  src="https://w.zhinka.tv/templates/Default/dleimages/no_image.jpg"
+                  alt={movie.title}
+                  className="imgCard"
+                />
+              )}
+
               <div className="overview">
                 <h3>Overview</h3>
                 <p>{movie.overview}</p>

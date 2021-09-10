@@ -1,9 +1,12 @@
 import { MovieCardView } from "../../views/MovieCardView";
 import { Link, Route, useRouteMatch } from "react-router-dom";
 
-function ListOfMoviesSearch({ results, query }) {
-  const { path } = useRouteMatch();
+function ListOfMoviesSearch({ results, query, pageForCard }) {
+  const { path, url } = useRouteMatch();
 
+  const changePageOfSearchForCard = () => {
+    pageForCard(url);
+  };
   return (
     <>
       <ul>
@@ -11,13 +14,18 @@ function ListOfMoviesSearch({ results, query }) {
           results.map((movie) => {
             return (
               <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                <Link
+                  to={`${url}/${movie.id}`}
+                  onClick={changePageOfSearchForCard}
+                >
+                  {movie.title}
+                </Link>
               </li>
             );
           })}
       </ul>
       <Route path={`${path}/:movieId`}>
-        <MovieCardView query={query} />
+        <MovieCardView query={query} props={Route.props} />
       </Route>
     </>
   );
