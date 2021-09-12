@@ -1,6 +1,10 @@
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import './ListOfMoviesHomePage.css';
 
+import slugify from 'slugify';
+
+const makeSlug = string => slugify(string, { lower: true });
+
 function ListOfMoviesHomePage({ movies, changePage }) {
   const { url } = useRouteMatch();
   const location = useLocation();
@@ -16,7 +20,9 @@ function ListOfMoviesHomePage({ movies, changePage }) {
             <li key={movie.id} className="ImageGalleryItem">
               <Link
                 to={{
-                  pathname: `/movies/${movie.id}`,
+                  pathname: `/movies/${makeSlug(
+                    `${movie.name} || ${movie.title} ${movie.id}`,
+                  )}`,
                   state: {
                     from: location,
                   },
@@ -29,10 +35,11 @@ function ListOfMoviesHomePage({ movies, changePage }) {
                   alt={movie.title}
                   className="ImageGalleryItem-image"
                 />
+
                 {movie.name ? (
                   <h3 className="CardTitleHomePage">{movie.name}</h3>
                 ) : (
-                  <h3>{movie.title}</h3>
+                  <h3 className="CardTitleHomePage">{movie.title}</h3>
                 )}
               </Link>
             </li>

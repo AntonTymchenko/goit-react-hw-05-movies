@@ -1,5 +1,8 @@
 import { MovieCardView } from '../../views/MovieCardView';
 import { Link, Route, useRouteMatch, useLocation } from 'react-router-dom';
+import slugify from 'slugify';
+
+const makeSlug = string => slugify(string, { lower: true });
 
 function ListOfMoviesSearch({ results, query, pageForCard }) {
   const { path, url } = useRouteMatch();
@@ -16,7 +19,9 @@ function ListOfMoviesSearch({ results, query, pageForCard }) {
               <li key={movie.id}>
                 <Link
                   to={{
-                    pathname: `${url}/${movie.id}`,
+                    pathname: `${url}/${makeSlug(
+                      `${movie.title} ${movie.id}`,
+                    )}`,
                     state: {
                       from: location,
                     },

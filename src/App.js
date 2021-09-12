@@ -1,18 +1,18 @@
-import "./App.css";
-import Container from "./components/Container/Container";
-import Appbar from "./components/Appbar/Appbar";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { HomePage } from "./views/Homepage";
-import { useState } from "react";
-import { MoviesSearchForm } from "./views/MoviesSearchForm";
-import { MovieCardView } from "./views/MovieCardView";
-import { Footer } from "./components/Footer/Footer";
+import './App.css';
+import Container from './components/Container/Container';
+import Appbar from './components/Appbar/Appbar';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { HomePage } from './views/Homepage';
+import { useState } from 'react';
+import { MoviesSearchForm } from './views/MoviesSearchForm';
+import { MovieCardView } from './views/MovieCardView';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [page, setPage] = useState(null);
 
-  const pageForCard = (name) => {
+  const pageForCard = name => {
     setPage(name);
   };
   return (
@@ -31,7 +31,7 @@ function App() {
             />
           </Route>
 
-          <Route path="/movies/:movieId">
+          <Route path="/movies/:slug">
             <MovieCardView
               query={query}
               saveQuery={setQuery}

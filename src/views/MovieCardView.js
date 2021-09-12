@@ -18,7 +18,8 @@ import Loader from 'react-loader-spinner';
 function MovieCardView({ query, saveQuery, currentPage }) {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-zA-Z0-9]+$/)[0];
   const { url, path } = useRouteMatch();
   const location = useLocation();
   const [prevLocation] = useState(location?.state?.from ?? '/');
@@ -26,7 +27,6 @@ function MovieCardView({ query, saveQuery, currentPage }) {
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
     fetchMoviebyId(movieId).then(movies => {
-      // console.log(movies);
       setMovie(movies);
       setLoadStatus(loadingStatus.RESOLVED);
     });
