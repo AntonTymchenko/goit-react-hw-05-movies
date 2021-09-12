@@ -41,8 +41,6 @@ function MovieCardView({ query, saveQuery, currentPage }) {
             Go back
           </NavLink>
 
-          {/* <Route exact path={`${currentPage}`} /> */}
-
           <Title title={movie.title + ' ' + movie.release_date.slice(0, 4)} />
           <div className="wrapperCardInfo">
             <div className="imgOverview">
