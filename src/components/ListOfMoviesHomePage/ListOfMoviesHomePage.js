@@ -20,9 +20,7 @@ function ListOfMoviesHomePage({ movies, changePage }) {
             <li key={movie.id} className="ImageGalleryItem">
               <Link
                 to={{
-                  pathname: `/movies/${makeSlug(
-                    `${movie.name} || ${movie.title} ${movie.id}`,
-                  )}`,
+                  pathname: `/movies/${makeSlug(`${movie.title} ${movie.id}`)}`,
                   state: {
                     from: location,
                   },
