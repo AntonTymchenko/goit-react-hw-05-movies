@@ -1,7 +1,9 @@
 import { fetchMovieCastCrewById } from '../service/service';
 import { useState, useEffect } from 'react';
 import './CastView.css';
+import noActhor from '../img/no-photo.jpg';
 
+console.log(noActhor);
 function CastView({ movieId }) {
   const [cast, setCast] = useState(null);
 
@@ -17,13 +19,13 @@ function CastView({ movieId }) {
           cast.map(actor => {
             let srcUrl = ``;
             if (!actor.profile_path) {
-              srcUrl = 'http://placehold.it/200x200';
+              srcUrl = 'http://placehold.it/300x450.png?text=No+Photo';
             } else {
               srcUrl = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
             }
             return (
               <li key={actor.id} className="castListItem">
-                <img src={srcUrl} alt={actor.name} width="80px" height="80px" />
+                <img src={srcUrl} alt={actor.name} className="imgItem" />
                 <p className="actorCharacter">
                   <b>Character</b>: {actor.character}
                 </p>

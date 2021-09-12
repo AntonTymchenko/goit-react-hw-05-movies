@@ -21,6 +21,7 @@ function MovieCardView({ query, saveQuery, currentPage }) {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
   const location = useLocation();
+  const [prevLocation] = useState(location?.state?.from ?? '/');
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
@@ -36,11 +37,11 @@ function MovieCardView({ query, saveQuery, currentPage }) {
       {loadStatus === loadingStatus.PENDING && <Loader className="loader" />}
       {loadStatus === loadingStatus.RESOLVED && (
         <>
-          <NavLink to={currentPage ?? '/'} className="linkBack">
+          <NavLink to={prevLocation} className="linkBack">
             Go back
           </NavLink>
 
-          <Route exact path={`${currentPage}`} />
+          {/* <Route exact path={`${currentPage}`} /> */}
 
           <Title title={movie.title + ' ' + movie.release_date.slice(0, 4)} />
           <div className="wrapperCardInfo">

@@ -8,8 +8,12 @@
 .castList > .castListItem {
   flex-basis: calc(100% / 3 - 170px);
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 35px;
 }
 .actorCharacter {
-  font-size: 10px;
+  font-size: 12px;
+}
+.castListItem {
+  width: 100px;
+  height: 350px;
 }
