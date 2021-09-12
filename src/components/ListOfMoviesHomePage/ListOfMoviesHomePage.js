@@ -1,10 +1,9 @@
-import { Link, useRouteMatch } from "react-router-dom";
-import "./ListOfMoviesHomePage.css";
-// import { useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
+import './ListOfMoviesHomePage.css';
 
 function ListOfMoviesHomePage({ movies, changePage }) {
   const { url } = useRouteMatch();
-  // console.log(url);
+  const location = useLocation();
 
   const onLinkListHomeClick = () => {
     changePage(url);
@@ -12,11 +11,16 @@ function ListOfMoviesHomePage({ movies, changePage }) {
   return (
     <ul className="ImageGallery">
       {movies &&
-        movies.map((movie) => {
+        movies.map(movie => {
           return (
             <li key={movie.id} className="ImageGalleryItem">
               <Link
-                to={`/movies/${movie.id}`}
+                to={{
+                  pathname: `/movies/${movie.id}`,
+                  state: {
+                    from: location,
+                  },
+                }}
                 className="LinkOfListHomepage"
                 onClick={onLinkListHomeClick}
               >

@@ -1,24 +1,23 @@
-import { fetchMovieCastCrewById } from "../service/service";
-import { useState, useEffect } from "react";
-import "./CastView.css";
+import { fetchMovieCastCrewById } from '../service/service';
+import { useState, useEffect } from 'react';
+import './CastView.css';
 
 function CastView({ movieId }) {
   const [cast, setCast] = useState(null);
 
   useEffect(() => {
-    fetchMovieCastCrewById(movieId).then((data) => {
+    fetchMovieCastCrewById(movieId).then(data => {
       setCast(data.cast);
-      console.log(data.cast);
     });
   }, [movieId]);
   return (
     <>
       <ul className="castList">
         {cast &&
-          cast.map((actor) => {
+          cast.map(actor => {
             let srcUrl = ``;
             if (!actor.profile_path) {
-              srcUrl = "http://placehold.it/200x200";
+              srcUrl = 'http://placehold.it/200x200';
             } else {
               srcUrl = `https://image.tmdb.org/t/p/original/${actor.profile_path}`;
             }

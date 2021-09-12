@@ -1,49 +1,48 @@
-import { useState, useEffect } from "react";
-import { useParams, NavLink, Route, useRouteMatch } from "react-router-dom";
-import { ButtonBack } from "../components/ButtonBack/ButtonBack";
-import { Title } from "../components/Title/Title";
-import { fetchMoviebyId } from "../service/service";
-import { CastView } from "../views/CastView";
-import { ReviewsView } from "./ReviewsView";
-import "./MovieCardView.css";
-import { loadingStatus } from "../utils/loadingStatus";
-import Loader from "react-loader-spinner";
+import { useState, useEffect } from 'react';
+import {
+  useParams,
+  NavLink,
+  Route,
+  useRouteMatch,
+  useLocation,
+} from 'react-router-dom';
+
+import { Title } from '../components/Title/Title';
+import { fetchMoviebyId } from '../service/service';
+import { CastView } from '../views/CastView';
+import { ReviewsView } from './ReviewsView';
+import './MovieCardView.css';
+import { loadingStatus } from '../utils/loadingStatus';
+import Loader from 'react-loader-spinner';
 
 function MovieCardView({ query, saveQuery, currentPage }) {
   const [loadStatus, setLoadStatus] = useState(loadingStatus.IDLE);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
+  const location = useLocation();
 
   useEffect(() => {
     setLoadStatus(loadingStatus.PENDING);
-    fetchMoviebyId(movieId).then((movies) => {
+    fetchMoviebyId(movieId).then(movies => {
       // console.log(movies);
       setMovie(movies);
       setLoadStatus(loadingStatus.RESOLVED);
     });
   }, [movieId]);
-  const clickGoBackLink = () => {
-    saveQuery(query);
-  };
 
   return (
     <>
       {loadStatus === loadingStatus.PENDING && <Loader className="loader" />}
       {loadStatus === loadingStatus.RESOLVED && (
         <>
-          <ButtonBack>
-            <NavLink
-              to={`${currentPage}`}
-              className="linkBack"
-              onClick={clickGoBackLink}
-            >
-              Go back
-            </NavLink>
-          </ButtonBack>
+          <NavLink to={currentPage ?? '/'} className="linkBack">
+            Go back
+          </NavLink>
+
           <Route exact path={`${currentPage}`} />
 
-          <Title title={movie.title + " " + movie.release_date.slice(0, 4)} />
+          <Title title={movie.title + ' ' + movie.release_date.slice(0, 4)} />
           <div className="wrapperCardInfo">
             <div className="imgOverview">
               {movie.poster_path ? (
@@ -69,7 +68,7 @@ function MovieCardView({ query, saveQuery, currentPage }) {
               <div className="ganres-div">
                 <h3>Genres</h3>
                 <ul className="ganresList">
-                  {movie.genres.map((item) => (
+                  {movie.genres.map(item => (
                     <li key={item.id} className="ganresListItem">
                       {item.name}
                     </li>
@@ -80,13 +79,26 @@ function MovieCardView({ query, saveQuery, currentPage }) {
                 <h3>Additional inforamtion</h3>
                 <ul className="CastReviewList">
                   <li key={100}>
-                    <NavLink to={`${url}/cast`} className="castReviewListItem">
+                    <NavLink
+                      to={{
+                        pathname: `${url}/cast`,
+                        state: {
+                          from: location,
+                        },
+                      }}
+                      className="castReviewListItem"
+                    >
                       Cast
                     </NavLink>
                   </li>
                   <li key={101}>
                     <NavLink
-                      to={`${url}/reviews`}
+                      to={{
+                        pathname: `${url}/reviews`,
+                        state: {
+                          from: location,
+                        },
+                      }}
                       className="castReviewListItem"
                     >
                       Reviews

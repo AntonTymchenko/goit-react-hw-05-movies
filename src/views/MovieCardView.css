@@ -47,3 +47,36 @@
   color: #7200cf;
   border-bottom-color: rgba(208, 64, 0, 0.2);
 }
+.linkBack {
+  width: 100px;
+  height: 35px;
+  display: block;
+  border: none;
+  background: #e1e6e9;
+  color: #111111;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 5px;
+  padding-left: 20px;
+
+  overflow: hidden;
+  font-size: 18px;
+  border-radius: 5px;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 500ms ease;
+}
+
+.linkBack:before {
+  font-family: FontAwesome;
+  content: '\f060';
+  position: absolute;
+
+  top: 11px;
+  left: -30px;
+  transition: all 200ms ease;
+}
+
+.linkBack:hover:before {
+  left: 7px;
+}
