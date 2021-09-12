@@ -1,9 +1,7 @@
 import { fetchMovieCastCrewById } from '../service/service';
 import { useState, useEffect } from 'react';
 import './CastView.css';
-import noActhor from '../img/no-photo.jpg';
 
-console.log(noActhor);
 function CastView({ movieId }) {
   const [cast, setCast] = useState(null);
 
